@@ -4,6 +4,11 @@
   margin-top: 186px;
 }
 
+.form__save-button_type_auth:hover {
+  opacity: 0.85;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 900px) {
   .form__save-button_type_auth {
     margin-top: 165px;

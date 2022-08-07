@@ -1,16 +1,32 @@
 import AuthForm from "./AuthForm.js";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import auth from "../utils/Auth.js";
 
-export default function Register() {
-  const [values, setValues] = useState({ email: "", password: "" });
+export default function Register({ setRegistationSuccessful }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory();
 
-  function handleChange(evt) {
-    const { value, name } = evt.target;
-    setValues({ ...values, [name]: value });
+  function handleEmailChange(evt) {
+    setEmail(evt.target.value);
   }
 
-  function onRegister() {}
+  function handlePasswordChange(evt) {
+    setPassword(evt.target.value);
+  }
+
+  function onRegister(evt) {
+    evt.preventDefault();
+    auth.register(email, password).then((res) => {
+      if (res) {
+        setRegistationSuccessful(true);
+        history.push("/");
+      } else {
+        setRegistationSuccessful(false);
+      }
+    });
+  }
 
   return (
     <>
@@ -28,9 +44,9 @@ export default function Register() {
           placeholder="Email"
           minLength="2"
           maxLength="40"
-          value={values.email || ""}
+          value={email || ""}
           name="email"
-          onChange={handleChange}
+          onChange={handleEmailChange}
           required
         />
         <span className="form__input-error name-input-error"></span>
@@ -41,9 +57,9 @@ export default function Register() {
           placeholder="Пароль"
           minLength="2"
           maxLength="200"
-          value={values.password || ""}
+          value={password || ""}
           name="password"
-          onChange={handleChange}
+          onChange={handlePasswordChange}
           required
         />
         <span className="form__input-error job-input-error"></span>

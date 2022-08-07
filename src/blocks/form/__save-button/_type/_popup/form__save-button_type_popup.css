@@ -3,3 +3,8 @@
   color: white;
   margin-top: 17px;
 }
+
+.form__save-button_type_popup:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}

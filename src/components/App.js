@@ -10,6 +10,7 @@ import ConfirmDeleteCard from "./ConfirmDeleteCard.js";
 import ImagePopup from "./ImagePopup.js";
 import Login from "./Login.js";
 import Register from "./Register.js";
+import InfoTooltip from "./InfoTooltip.js";
 import ProtectedRoute from "./ProtectedRoute.js";
 import api from "../utils/Api.js";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
@@ -26,11 +27,14 @@ function App() {
   const [isDeleteCardPopupOpen, setDeleteCardPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
+  const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
   // рендер текста для кнопкок формы после нажатия на сабмит
   const [isLoading, setIsLoading] = useState(false);
 
-  // проверка авторизации
+  // проверка авторизации и регистрации
+  const [isRegistationSuccessful, setRegistationSuccessful] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState("");
 
   // получаем и устанавливаем информацию о пользователе с сервера
   useEffect(() => {
@@ -110,6 +114,7 @@ function App() {
     setAddCardPopupOpen(false);
     setImagePopupOpen(false);
     setDeleteCardPopupOpen(false);
+    setInfoTooltipPopupOpen(false);
     setSelectedCard({});
   }
 
@@ -168,7 +173,7 @@ function App() {
             <Login />
           </Route>
           <Route path="/sign-up">
-            <Register />
+            <Register setRegistationSuccessful={setRegistationSuccessful} />
           </Route>
           <ProtectedRoute
             isloggedIn={isLoggedIn}
@@ -218,6 +223,12 @@ function App() {
           card={selectedCard}
           onCardClick={handleCardClick}
           isOpen={isImagePopupOpen}
+        />
+
+        <InfoTooltip
+          isOpen={isInfoTooltipPopupOpen}
+          onClose={closeAllPopups}
+          isRegistationSuccessful={isRegistationSuccessful}
         />
 
         <Footer />

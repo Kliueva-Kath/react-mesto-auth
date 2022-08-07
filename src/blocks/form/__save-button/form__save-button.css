@@ -11,11 +11,6 @@
   text-align: center;
 }
 
-.form__save-button:hover {
-  opacity: 0.8;
-  cursor: pointer;
-}
-
 @media screen and (max-width: 900px) {
   .form__save-button {
     font-size: 16px;

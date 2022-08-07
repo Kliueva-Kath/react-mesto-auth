@@ -93,3 +93,9 @@
 @import url("./blocks/form/__input/_type/_auth/form__input_type_auth.css");
 @import url("./blocks/form/__save-button/_type/_auth/form__save-button_type_auth.css");
 @import url("./blocks/auth-form/__header/auth-form__header.css");
+
+/* попап после регистрации */
+
+@import url("./blocks/tooltip/tooltip.css");
+@import url("./blocks/tooltip/__image/tooltip__image.css");
+@import url("./blocks/tooltip/__text/tooltip__text.css");

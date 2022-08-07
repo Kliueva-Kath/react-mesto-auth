@@ -8,6 +8,9 @@
   width: 430px;
   justify-self: center;
   align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media screen and (max-width: 900px) {
@@ -21,8 +24,6 @@
 @media screen and (max-width: 500px) {
   .popup__container {
     width: 282px;
-    padding-left: 22px;
-    padding-right: 22px;
     padding: 25px 22px;
   }
 }

@@ -1,12 +1,17 @@
 import AuthForm from "./AuthForm.js";
 import { useState } from "react";
+import auth from "../utils/Auth.js";
 
 export default function Login() {
-  const [values, setValues] = useState({ email: "", password: "" });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  function handleChange(evt) {
-    const { value, name } = evt.target;
-    setValues({ ...values, [name]: value });
+  function handleEmailChange(evt) {
+    setEmail(evt.target.value);
+  }
+
+  function handlePasswordChange(evt) {
+    setPassword(evt.target.value);
   }
 
   function onLogin() {}
@@ -26,9 +31,9 @@ export default function Login() {
         placeholder="Email"
         minLength="2"
         maxLength="40"
-        value={values.email || ""}
+        value={email || ""}
         name="email"
-        onChange={handleChange}
+        onChange={handleEmailChange}
         required
       />
       <span className="form__input-error name-input-error"></span>
@@ -39,9 +44,9 @@ export default function Login() {
         placeholder="Пароль"
         minLength="2"
         maxLength="200"
-        value={values.password || ""}
+        value={password || ""}
         name="password"
-        onChange={handleChange}
+        onChange={handlePasswordChange}
         required
       />
       <span className="form__input-error job-input-error"></span>
