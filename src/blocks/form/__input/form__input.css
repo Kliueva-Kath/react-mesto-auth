@@ -1,18 +1,14 @@
 .form__input {
+  box-sizing: border-box;
   border: none;
-  color: #000000;
+  background: transparent;
+  font-family: "Inter", "Arial", sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding-bottom: 9px;
+  padding: 0 0 9px;
   max-width: 358px;
   margin-bottom: 30px;
-}
-
-.form__input:focus {
-  outline: none;
-  border-bottom: 1px solid black;
 }
 
 .form__input::placeholder {

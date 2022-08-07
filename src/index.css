@@ -62,12 +62,14 @@
 /* форма попапа */
 
 @import url("./blocks/form/__save-button/form__save-button.css");
+@import url("./blocks/form/__save-button/_type/_popup/form__save-button_type_popup.css");
 @import url("./blocks/form/__save-button/_inactive/form__save-button_inactive.css");
 
 /* поля ввода попапа */
 
 @import url("./blocks/form/__input/form__input.css");
 @import url("./blocks/form/__input/_type/_error/form__input_type_error.css");
+@import url("./blocks/form/__input/_type/_popup/form__input_type_popup.css");
 @import url("./blocks/form/__input-error/form__input-error.css");
 @import url("./blocks/form/__input-error/_visible/form__input-error_visible.css");
 
@@ -81,3 +83,9 @@
 
 @import url("./blocks/form/form.css");
 @import url("./blocks/button/button.css");
+
+/* стили для входа и регистрации */
+
+@import url("./blocks/form/__input/_type/_auth/form__input_type_auth.css");
+@import url("./blocks/form/__save-button/_type/_auth/form__save-button_type_auth.css");
+@import url("./blocks/form/_type/_auth/form_type_auth.css");

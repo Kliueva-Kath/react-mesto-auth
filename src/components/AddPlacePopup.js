@@ -36,7 +36,7 @@ export default function AddPlacePopup({
     >
       <input
         type="text"
-        className="form__input"
+        className="form__input form__input_type_popup"
         id="place-input"
         name="name"
         value={values.name || ""}
@@ -49,7 +49,7 @@ export default function AddPlacePopup({
       <span className="form__input-error place-input-error"></span>
       <input
         type="url"
-        className="form__input"
+        className="form__input form__input_type_popup"
         id="url-input"
         name="link"
         value={values.link || ""}

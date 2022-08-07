@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
@@ -10,6 +10,7 @@ import ConfirmDeleteCard from "./ConfirmDeleteCard.js";
 import ImagePopup from "./ImagePopup.js";
 import Login from "./Login.js";
 import Register from "./Register.js";
+import ProtectedRoute from "./ProtectedRoute.js";
 import api from "../utils/Api.js";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
 
@@ -27,6 +28,9 @@ function App() {
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
   // рендер текста для кнопкок формы после нажатия на сабмит
   const [isLoading, setIsLoading] = useState(false);
+
+  // проверка авторизации
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   // получаем и устанавливаем информацию о пользователе с сервера
   useEffect(() => {
@@ -160,7 +164,15 @@ function App() {
       <div className="page">
         <Header />
         <Switch>
-          <Main
+          <Route path="/sign-in">
+            <Login />
+          </Route>
+          <Route path="/sign-up">
+            <Register />
+          </Route>
+          <ProtectedRoute
+            isloggedIn={isLoggedIn}
+            component={Main}
             onEditProfile={handleEditProfileClick}
             onAddCard={handleAddCardClick}
             onEditAvatar={handleEditAvatarClick}
@@ -170,12 +182,6 @@ function App() {
             onCardDelete={handleCardDelete}
             onDeleteCardClick={handleDeleteCardClick}
           />
-          <Route path="/sign-in">
-            <Login />
-          </Route>
-          <Route path="/sign-up">
-            <Register />
-          </Route>
         </Switch>
 
         <EditProfilePopup

@@ -22,7 +22,10 @@ function PopupWithForm({
           noValidate
         >
           {children}
-          <button className="button form__save-button" type="submit">
+          <button
+            className="button form__save-button form__save-button_type_popup"
+            type="submit"
+          >
             {isLoading ? loadingText : buttonText}
           </button>
         </form>

@@ -39,7 +39,7 @@ export default function EditProfilePopup({
     >
       <input
         type="text"
-        className="form__input"
+        className="form__input form__input_type_popup"
         id="name-input"
         placeholder="Имя"
         minLength="2"
@@ -52,7 +52,7 @@ export default function EditProfilePopup({
       <span className="form__input-error name-input-error"></span>
       <input
         type="text"
-        className="form__input"
+        className="form__input form__input_type_popup"
         id="job-input"
         placeholder="О себе"
         minLength="2"
