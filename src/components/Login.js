@@ -26,7 +26,7 @@ export default function Login() {
         placeholder="Email"
         minLength="2"
         maxLength="40"
-        value={values.name || ""}
+        value={values.email || ""}
         name="email"
         onChange={handleChange}
         required
@@ -39,7 +39,7 @@ export default function Login() {
         placeholder="Пароль"
         minLength="2"
         maxLength="200"
-        value={values.about || ""}
+        value={values.password || ""}
         name="password"
         onChange={handleChange}
         required

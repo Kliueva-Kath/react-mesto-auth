@@ -1,9 +1,8 @@
 .form__input_type_auth {
   color: #cccccc;
-  border-bottom: 1px solid rgba(204, 204, 204, 0.2);
+  border-bottom: 2px solid #cccccc;
 }
 
 .form__input_type_auth:focus {
   outline: none;
-  border-bottom: 1px solid #cccccc;
 }

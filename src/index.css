@@ -16,6 +16,7 @@
 
 @import url("./blocks/header/header.css");
 @import url("./blocks/header/__logo/header__logo.css");
+@import url("./blocks/header/__link/header__link.css");
 
 /*блок profile*/
 
@@ -86,6 +87,9 @@
 
 /* стили для входа и регистрации */
 
+@import url("./blocks/auth-form/auth-form.css");
+@import url("./blocks/auth-form/__redirect/auth-form__redirect.css");
+@import url("./blocks/auth-form/__link/auth-form__link.css");
 @import url("./blocks/form/__input/_type/_auth/form__input_type_auth.css");
 @import url("./blocks/form/__save-button/_type/_auth/form__save-button_type_auth.css");
-@import url("./blocks/form/_type/_auth/form_type_auth.css");
+@import url("./blocks/auth-form/__header/auth-form__header.css");

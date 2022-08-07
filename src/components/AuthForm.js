@@ -8,10 +8,10 @@ export default function AuthForm({
   loadingText,
 }) {
   return (
-    <div class="auth-form">
-      <h2 className="form__header">{title}</h2>
+    <div className="auth-form">
+      <h2 className="auth-form__header">{title}</h2>
       <form
-        className="form form_type_auth"
+        className="form"
         name={`${name}-form`}
         onSubmit={onSubmit}
         noValidate
