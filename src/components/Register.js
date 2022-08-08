@@ -3,7 +3,10 @@ import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import auth from "../utils/Auth.js";
 
-export default function Register({ setRegistationSuccessful }) {
+export default function Register({
+  setRegistationSuccessful,
+  handleInfoTooltipPopupOpen,
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -18,14 +21,17 @@ export default function Register({ setRegistationSuccessful }) {
 
   function onRegister(evt) {
     evt.preventDefault();
-    auth.register(email, password).then((res) => {
-      if (res) {
+    auth
+      .register(email, password)
+      .then((res) => {
         setRegistationSuccessful(true);
-        history.push("/");
-      } else {
+        handleInfoTooltipPopupOpen();
+        history.push("/sign-in");
+      })
+      .catch((err) => {
         setRegistationSuccessful(false);
-      }
-    });
+        handleInfoTooltipPopupOpen();
+      });
   }
 
   return (
@@ -73,5 +79,3 @@ export default function Register({ setRegistationSuccessful }) {
     </>
   );
 }
-
-//TODO ОТКУДА ПРОКРУТКА ПО ГОРИЗОНТАЛИ????

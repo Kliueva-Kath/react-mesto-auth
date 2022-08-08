@@ -32,7 +32,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   // проверка авторизации и регистрации
-  const [isRegistationSuccessful, setRegistationSuccessful] = useState(false);
+  const [isRegistationSuccessful, setRegistationSuccessful] = useState();
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -107,6 +107,18 @@ function App() {
     setImagePopupOpen(!isImagePopupOpen);
   }
 
+  // открытие попапа информации о регистрации
+
+  function handleInfoTooltipPopupOpen() {
+    setInfoTooltipPopupOpen(!isInfoTooltipPopupOpen);
+    console.log("infotooltip открылся");
+  }
+
+  // изменения статуса авторизации
+  function handleLoginStatus() {
+    setLoggedIn(!isLoggedIn);
+  }
+
   // функция закрытия всех попапов
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
@@ -170,13 +182,15 @@ function App() {
         <Header />
         <Switch>
           <Route path="/sign-in">
-            <Login />
+            <Login handleLoginStatus={handleLoginStatus} />
           </Route>
           <Route path="/sign-up">
-            <Register setRegistationSuccessful={setRegistationSuccessful} />
+            <Register
+              setRegistationSuccessful={setRegistationSuccessful}
+              handleInfoTooltipPopupOpen={handleInfoTooltipPopupOpen}
+            />
           </Route>
           <ProtectedRoute
-            isloggedIn={isLoggedIn}
             component={Main}
             onEditProfile={handleEditProfileClick}
             onAddCard={handleAddCardClick}
@@ -186,6 +200,7 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
             onDeleteCardClick={handleDeleteCardClick}
+            isLoggedIn={isLoggedIn}
           />
         </Switch>
 

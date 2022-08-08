@@ -1,10 +1,12 @@
 import AuthForm from "./AuthForm.js";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import auth from "../utils/Auth.js";
 
-export default function Login() {
+export default function Login({ handleLoginStatus }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   function handleEmailChange(evt) {
     setEmail(evt.target.value);
@@ -14,8 +16,24 @@ export default function Login() {
     setPassword(evt.target.value);
   }
 
-  function onLogin() {}
-
+  function onLogin(evt) {
+    evt.preventDefault();
+    auth
+      .authorize(email, password)
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+          handleLoginStatus();
+          history.push("/");
+          return res;
+        } else {
+          return;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   return (
     <AuthForm
       name="login"

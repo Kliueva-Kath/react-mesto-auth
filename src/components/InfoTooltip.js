@@ -1,9 +1,13 @@
 import registrSuccessPath from "../images/registration-success.svg";
 import registrErrorPath from "../images/registration-error.svg";
 
-export default function InfoTooltip({ isRegistationSuccessful, onClose }) {
+export default function InfoTooltip({
+  isRegistationSuccessful,
+  onClose,
+  isOpen,
+}) {
   return (
-    <div className="tooltip">
+    <div className={`popup ${isOpen && "popup_opened"}`}>
       <div className="popup__container">
         <img
           className="tooltip__image"

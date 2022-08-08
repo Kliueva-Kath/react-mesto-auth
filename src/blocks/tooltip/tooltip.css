@@ -8,9 +8,9 @@
   right: 0;
   padding-left: 19px;
   padding-right: 19px;
-  /*  visibility: hidden; 
+  visibility: hidden;
   opacity: 0;
-  transition: visibility 0.3s, opacity 0.3s linear; */
+  transition: visibility 0.3s, opacity 0.3s linear;
   display: flex;
   justify-content: center;
   align-items: center;
