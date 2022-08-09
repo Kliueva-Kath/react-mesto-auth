@@ -8,9 +8,9 @@
   width: 430px;
   justify-self: center;
   align-self: center;
-  display: flex;
+  /*    display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center;*/
 }
 
 @media screen and (max-width: 900px) {

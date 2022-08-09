@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
@@ -14,8 +14,11 @@ import InfoTooltip from "./InfoTooltip.js";
 import ProtectedRoute from "./ProtectedRoute.js";
 import api from "../utils/Api.js";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
+import auth from "../utils/Auth.js";
 
 function App() {
+  const history = useHistory();
+
   const [currentUser, setCurrentUser] = useState({});
 
   const [cards, setCards] = useState([]);
@@ -59,6 +62,24 @@ function App() {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      auth
+        .checkToken(token)
+        .then((res) => {
+          if (res) {
+            setEmail(res.data.email);
+            setLoggedIn(true);
+            history.push("/");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
 
   // событие нажатия на кнопку лайка
   function handleCardLike(card) {
@@ -115,8 +136,8 @@ function App() {
   }
 
   // изменения статуса авторизации
-  function handleLoginStatus() {
-    setLoggedIn(!isLoggedIn);
+  function handleLogin() {
+    setLoggedIn(true);
   }
 
   // функция закрытия всех попапов
@@ -179,15 +200,16 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header />
+        <Header history={history} email={email} />
         <Switch>
           <Route path="/sign-in">
-            <Login handleLoginStatus={handleLoginStatus} />
+            <Login handleLogin={handleLogin} history={history} />
           </Route>
           <Route path="/sign-up">
             <Register
               setRegistationSuccessful={setRegistationSuccessful}
               handleInfoTooltipPopupOpen={handleInfoTooltipPopupOpen}
+              history={history}
             />
           </Route>
           <ProtectedRoute

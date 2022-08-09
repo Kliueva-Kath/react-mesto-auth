@@ -8,7 +8,7 @@ export default function InfoTooltip({
 }) {
   return (
     <div className={`popup ${isOpen && "popup_opened"}`}>
-      <div className="popup__container">
+      <div className="tooltip popup__container">
         <img
           className="tooltip__image"
           src={isRegistationSuccessful ? registrSuccessPath : registrErrorPath}

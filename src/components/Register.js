@@ -1,15 +1,15 @@
 import AuthForm from "./AuthForm.js";
 import { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import auth from "../utils/Auth.js";
 
 export default function Register({
   setRegistationSuccessful,
   handleInfoTooltipPopupOpen,
+  history,
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory();
 
   function handleEmailChange(evt) {
     setEmail(evt.target.value);
@@ -25,11 +25,15 @@ export default function Register({
       .register(email, password)
       .then((res) => {
         setRegistationSuccessful(true);
+        setEmail("");
+        setPassword("");
         handleInfoTooltipPopupOpen();
         history.push("/sign-in");
       })
       .catch((err) => {
         setRegistationSuccessful(false);
+        setEmail("");
+        setPassword("");
         handleInfoTooltipPopupOpen();
       });
   }
@@ -72,7 +76,7 @@ export default function Register({
       </AuthForm>
       <p className="auth-form__redirect">
         Уже зарегистрированы?
-        <Link to="/signin" className="auth-form__link">
+        <Link to="/sign-in" className="auth-form__link">
           Войти
         </Link>
       </p>
