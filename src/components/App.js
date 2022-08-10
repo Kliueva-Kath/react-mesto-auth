@@ -63,6 +63,7 @@ function App() {
       });
   }, []);
 
+  // проверка токена
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
