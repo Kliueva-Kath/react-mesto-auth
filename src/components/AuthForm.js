@@ -10,12 +10,7 @@ export default function AuthForm({
   return (
     <div className="auth-form">
       <h2 className="auth-form__header">{title}</h2>
-      <form
-        className="form"
-        name={`${name}-form`}
-        onSubmit={onSubmit}
-        noValidate
-      >
+      <form className="form" name={`${name}-form`} onSubmit={onSubmit}>
         {children}
         <button
           className="button form__save-button form__save-button_type_auth"
