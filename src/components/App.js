@@ -137,7 +137,7 @@ function App() {
 
   // изменения статуса авторизации
   function handleLogin() {
-    setLoggedIn(true);
+    setLoggedIn(!isLoggedIn);
   }
 
   // функция закрытия всех попапов
@@ -200,7 +200,12 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header history={history} email={email} />
+        <Header
+          history={history}
+          email={email}
+          isLoggedIn={isLoggedIn}
+          handleLogin={handleLogin}
+        />
         <Switch>
           <Route path="/sign-in">
             <Login handleLogin={handleLogin} history={history} />

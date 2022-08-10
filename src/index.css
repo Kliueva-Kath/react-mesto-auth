@@ -20,6 +20,10 @@
 @import url("./blocks/header/__menu/header__menu.css");
 @import url("./blocks/header/__email/header__email.css");
 @import url("./blocks/header/__logout-button/header__logout-button.css");
+@import url("./blocks/header/__mobile-menu/header__mobile-menu.css");
+@import url("./blocks/header/__mobile-menu/_open/header__mobile-menu_open.css");
+@import url("./blocks/header/__menu-button/header__menu-button.css");
+@import url("./blocks/header/__menu-exit/header__menu-exit.css");
 
 /*блок profile*/
 
