@@ -1,44 +1,24 @@
 import AuthForm from "./AuthForm.js";
 import { useState } from "react";
-import auth from "../utils/Auth.js";
 
-export default function Login({ handleLogin, history }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function Login({ onLogin, history }) {
+  const [values, setValues] = useState({ email: "", password: "" });
 
-  function handleEmailChange(evt) {
-    setEmail(evt.target.value);
+  function handleChange(evt) {
+    const { value, name } = evt.target;
+    setValues({ ...values, [name]: value });
   }
 
-  function handlePasswordChange(evt) {
-    setPassword(evt.target.value);
-  }
-
-  function onLogin(evt) {
+  function handleLogin(evt) {
     evt.preventDefault();
-    auth
-      .authorize(email, password)
-      .then((res) => {
-        if (res.token) {
-          localStorage.setItem("jwt", res.token);
-          handleLogin();
-          setEmail(res.email);
-          history.push("/");
-          return res;
-        } else {
-          return;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    onLogin(values);
   }
   return (
     <AuthForm
       name="login"
       title="Вход"
       buttonText="Войти"
-      onSubmit={onLogin}
+      onSubmit={handleLogin}
       loadingText="Сохранение..."
     >
       <input
@@ -48,9 +28,9 @@ export default function Login({ handleLogin, history }) {
         placeholder="Email"
         minLength="2"
         maxLength="40"
-        value={email || ""}
+        value={values.email || ""}
         name="email"
-        onChange={handleEmailChange}
+        onChange={handleChange}
         required
       />
       <span className="form__input-error name-input-error"></span>
@@ -61,9 +41,9 @@ export default function Login({ handleLogin, history }) {
         placeholder="Пароль"
         minLength="2"
         maxLength="200"
-        value={password || ""}
+        value={values.password || ""}
         name="password"
-        onChange={handlePasswordChange}
+        onChange={handleChange}
         required
       />
       <span className="form__input-error job-input-error"></span>

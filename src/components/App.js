@@ -35,7 +35,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   // проверка авторизации и регистрации
-  const [isRegistationSuccessful, setRegistationSuccessful] = useState();
+  const [isRegistationSuccessful, setRegistationSuccessful] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -49,7 +49,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [isLoggedIn]);
 
   // получаем и массив карточек с сервера
   useEffect(() => {
@@ -61,7 +61,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [isLoggedIn]);
 
   // проверка токена
   useEffect(() => {
@@ -129,18 +129,6 @@ function App() {
     setImagePopupOpen(!isImagePopupOpen);
   }
 
-  // открытие попапа информации о регистрации
-
-  function handleInfoTooltipPopupOpen() {
-    setInfoTooltipPopupOpen(!isInfoTooltipPopupOpen);
-    console.log("infotooltip открылся");
-  }
-
-  // изменения статуса авторизации
-  function handleLogin() {
-    setLoggedIn(!isLoggedIn);
-  }
-
   // функция закрытия всех попапов
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
@@ -197,26 +185,56 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
+  function handleLogin(data) {
+    auth
+      .authorize(data)
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+          setLoggedIn(true);
+          setEmail(res.email);
+          history.push("/");
+          return res;
+        } else {
+          return;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleRegistration(data) {
+    auth
+      .register(data)
+      .then((res) => {
+        setRegistationSuccessful(true);
+        setInfoTooltipPopupOpen(true);
+        history.push("/sign-in");
+      })
+      .catch((err) => {
+        setRegistationSuccessful(false);
+        setInfoTooltipPopupOpen(true);
+      });
+  }
+
+  function handleLogout() {
+    localStorage.removeItem("jwt");
+    setLoggedIn(false);
+    history.push("/sign-up");
+  }
+
   // JSX-разметка
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header
-          history={history}
-          email={email}
-          isLoggedIn={isLoggedIn}
-          handleLogin={handleLogin}
-        />
+        <Header email={email} isLoggedIn={isLoggedIn} onLogout={handleLogout} />
         <Switch>
           <Route path="/sign-in">
-            <Login handleLogin={handleLogin} history={history} />
+            <Login onLogin={handleLogin} history={history} />
           </Route>
           <Route path="/sign-up">
-            <Register
-              setRegistationSuccessful={setRegistationSuccessful}
-              handleInfoTooltipPopupOpen={handleInfoTooltipPopupOpen}
-              history={history}
-            />
+            <Register onRegister={handleRegistration} />
           </Route>
           <ProtectedRoute
             component={Main}

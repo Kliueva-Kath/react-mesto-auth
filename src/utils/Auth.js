@@ -11,19 +11,19 @@ class Auth {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  register(email, password) {
+  register(data) {
     return fetch(`${this._url}/signup`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email: data.email, password: data.password }),
     }).then(this._checkResponse);
   }
 
-  authorize(email, password) {
+  authorize(data) {
     return fetch(`${this._url}/signin`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email: data.email, password: data.password }),
     }).then(this._checkResponse);
   }
 

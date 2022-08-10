@@ -3,7 +3,7 @@ import logoPath from "../images/header__logo.svg";
 import { Switch, Route, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-function Header({ history, email, handleLogin, isLoggedIn }) {
+function Header({ email, isLoggedIn, onLogout }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   // настройка рендеринга элементов в зависимости от ширины экрана
@@ -22,10 +22,8 @@ function Header({ history, email, handleLogin, isLoggedIn }) {
     setMenuOpen(!isMenuOpen);
   }
 
-  function logout() {
-    localStorage.removeItem("jwt");
-    handleLogin();
-    history.push("/sign-up");
+  function handleLogout() {
+    onLogout();
   }
 
   return (
@@ -37,7 +35,10 @@ function Header({ history, email, handleLogin, isLoggedIn }) {
           }`}
         >
           <p className="header__email">{email}</p>
-          <button className="button header__logout-button" onClick={logout}>
+          <button
+            className="button header__logout-button"
+            onClick={handleLogout}
+          >
             Выйти
           </button>
         </div>
@@ -63,7 +64,7 @@ function Header({ history, email, handleLogin, isLoggedIn }) {
                     <p className="header__email">{email}</p>
                     <button
                       className="button header__logout-button"
-                      onClick={logout}
+                      onClick={handleLogout}
                     >
                       Выйти
                     </button>
