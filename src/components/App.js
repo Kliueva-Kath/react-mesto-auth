@@ -41,26 +41,30 @@ function App() {
 
   // получаем и устанавливаем информацию о пользователе с сервера
   useEffect(() => {
-    api
-      .getUserInfo()
-      .then((userInfo) => {
-        setCurrentUser(userInfo);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (isLoggedIn) {
+      api
+        .getUserInfo()
+        .then((userInfo) => {
+          setCurrentUser(userInfo);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [isLoggedIn]);
 
   // получаем и массив карточек с сервера
   useEffect(() => {
-    api
-      .getCards()
-      .then((cardsInfo) => {
-        setCards(cardsInfo);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (isLoggedIn) {
+      api
+        .getCards()
+        .then((cardsInfo) => {
+          setCards(cardsInfo);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [isLoggedIn]);
 
   // проверка токена
