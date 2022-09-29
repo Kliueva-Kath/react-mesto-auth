@@ -69,10 +69,10 @@ function App() {
 
   // проверка токена
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
+/*     const token = localStorage.getItem("jwt");
+    if (token) { */
       auth
-        .checkToken(token)
+        .checkToken()
         .then((res) => {
           if (res) {
             setEmail(res.data.email);
@@ -83,7 +83,7 @@ function App() {
         .catch((err) => {
           console.log(err);
         });
-    }
+/*     } */
   });
 
   // событие нажатия на кнопку лайка
@@ -193,15 +193,10 @@ function App() {
     auth
       .authorize(data)
       .then((res) => {
-        if (res.token) {
-          localStorage.setItem("jwt", res.token);
+          localStorage.setItem("loggedIn", true);
           setLoggedIn(true);
           setEmail(res.email);
           history.push("/");
-          return res;
-        } else {
-          return;
-        }
       })
       .catch((err) => {
         console.log(err);
@@ -223,7 +218,7 @@ function App() {
   }
 
   function handleLogout() {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem("loggedIn");
     setLoggedIn(false);
     history.push("/sign-up");
   }

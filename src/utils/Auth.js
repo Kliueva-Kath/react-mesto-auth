@@ -33,10 +33,6 @@ class Auth {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
       headers: this._headers,
-/*       headers: {
-        ...this._headers,
-        Authorization: `Bearer ${token}`,
-      }, */
       credentials: 'include',
     }).then(this._checkResponse);
   }
