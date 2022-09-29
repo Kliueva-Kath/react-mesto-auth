@@ -42,7 +42,7 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: "http://api.mesto.kliueva.nomoredomains.club",
+  baseUrl: "https://api.mesto.kliueva.nomoredomains.club",
   headers: {
     "content-type": "application/json",
   },
