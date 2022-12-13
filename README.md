@@ -1,7 +1,5 @@
 # Проект: Место
 
-**Проект можно посмотреть по ссылке на** [GitHub Pages](https://kliueva-kath.github.io/mesto/)
-
 ## Описание
 
 Рефакторинг проекта Mesto ([GitHub Page](https://kliueva-kath.github.io/mesto/)), написанного на стандартном синтаксисе JavaScript на синтаксис React.js.
